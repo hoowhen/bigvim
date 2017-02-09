@@ -14,11 +14,11 @@ bigvim
 
 2. 安装步骤
   ```
-  curl -o- https://raw.githubusercontent.com/ruanyl/bigvim/master/install.sh | bash
+  curl -o- https://raw.githubusercontent.com/hoowhen/bigvim/master/install.sh | bash
   ```
   或者
   ```
-  wget -qO- https://raw.githubusercontent.com/ruanyl/bigvim/master/install.sh | bash
+  wget -qO- https://raw.githubusercontent.com/hoowhen/bigvim/master/install.sh | bash
   ```
 
 #### 选装
@@ -30,6 +30,7 @@ bigvim
   npm i -g eslint eslint-config-airbnb babel-eslint eslint-plugin-react #JS 语法，代码规范检查
   或者
   npm i --save-dev eslint eslint-config-airbnb babel-eslint eslint-plugin-react
+  ```
   npm i -g js-beautify # JS, CSS, HTML 快速格式化
   npm i -g git+https://github.com/ramitos/jsctags.git # tagbar JS 支持
   ```

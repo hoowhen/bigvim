@@ -1,3 +1,66 @@
 " in order to make your local setting works
 " copy this file and rename it as vimrc.local
 " add your vimrc configurations here
+" 新建.c,.h,.sh,.java文件，自动插入文件头 {
+autocmd BufNewFile *.md exec ":call Setmd()"
+func Setmd()
+    call setline(1,"date: ".strftime("%Y-%m-%d %T"))
+    call append(line("."),"tags: ")
+    call append(line(".")+1,"---")
+    call append(line(".")+2,"")
+endfunc
+autocmd BufNewFile *.cpp,*.[ch],*.sh,*.py,*.html,*.php,*java exec ":call SetTitle()"
+""定义函数SetTitle，自动插入文件头
+func SetTitle()
+    if &filetype=='python'
+        call setline(1, "#-*- encoding: UTF-8 -*-")
+        call append(line("."), "#---------------------------------import------------------------------------")
+        call append(line(".")+1, "#---------------------------------------------------------------------------")
+        call append(line(".")+2, "############################################################################")
+    endif
+    if &filetype=='sh'
+        call setline(1,"\#########################################################################")
+        call append(line("."), "\# File Name: ".expand("%"))
+        call append(line(".")+1, "\# Author: hoowhen")
+        call append(line(".")+2, "\# mail: hoowhen@126.com")
+        call append(line(".")+3, "\# Created Time: ".strftime("%c"))
+        call append(line(".")+4, "\# Last changed:  TIMESTAMP")
+        call append(line(".")+5, "\#########################################################################")
+        call append(line(".")+6, "\#!/bin/bash".expand("%"))
+        call append(line(".")+7, "")
+    endif
+    if &filetype=='html' || &filetype=='php'
+        call setline(1, "<!--*************************************************************************")
+        call append(line("."), "      > File Name: ".expand("%"))
+        call append(line(".")+1, "      > Author: hoowhen")
+        call append(line(".")+2, "      > Mail: hoowhen@126.com")
+        call append(line(".")+3, "      > Created Time: ".strftime("%c"))
+        call append(line(".")+4, "      > Last changed:  TIMESTAMP")
+        call append(line(".")+5, " ************************************************************************-->")
+        call append(line(".")+6, "")
+    endif
+    if &filetype=='cpp'
+        call append(line(".")+6, "#include<iostream>")
+        call append(line(".")+7, "using namespace std;")
+        call append(line(".")+8, "")
+    endif
+    if &filetype=='c'
+        call setline(1, "/*************************************************************************")
+        call append(line("."), "      > File Name: ".expand("%"))
+        call append(line(".")+1, "      > Author: hoowhen")
+        call append(line(".")+2, "      > Mail: hoowhen@126.com")
+        call append(line(".")+3, "      > Created Time: ".strftime("%c"))
+        call append(line(".")+4, "      > Last changed: TIMESTAMP")
+        call append(line(".")+5, " ************************************************************************/")
+        call append(line(".")+6, "#include<stdio.h>")
+        call append(line(".")+7, "")
+    endif
+    if &filetype=='php' || &filetype=='html'
+        call setline(9,['<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">','<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">','<head>','    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />','    <title></title>','</head>','<body>','</body>','</html>'])
+    endif
+    if &filetype=='java'
+    call setline(9,['public class '.strpart(expand("%"),0,strlen(expand("%"))-5),'{','}'])
+    endif
+endfunc
+autocmd BufNewFile * normal G "新建文件后，自动定位到文件末尾
+" }

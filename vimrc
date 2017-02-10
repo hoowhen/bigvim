@@ -35,8 +35,16 @@ set nobackup
 set noswapfile
 set cursorcolumn          " highlight current column
 set cursorline            " highlight current line
+<<<<<<< HEAD
 "set t_ti= t_te=          " " alway show the content on the screen after exist VIM   " 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制,好处：误删什么的，   如果以前屏幕打开，可以找回
 set mouse-=a              " disable mouse
+=======
+
+" 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制,好处：误删什么的，   如果以前屏幕打开，可以找回
+"set t_ti= t_te=          " " alway show the content on the screen after exist VIM  
+
+set mouse+=a              " disable mouse
+>>>>>>> f3f20699e8192c92a4d4e3000808c6b32e884629
 set selection=inclusive   "set selection=exclusive
 set selectmode=mouse,key
 set title                 " change the terminal's title
@@ -111,6 +119,7 @@ set pastetoggle=<F2>                         " when in insert mode, toggle betwe
 let &colorcolumn="80"
 
 " 插入模式下用绝对行号, 普通模式下用相对
+<<<<<<< HEAD
 autocmd InsertEnter * :set norelativenumber number " no relativenumber in insert mode
 autocmd InsertLeave * :set relativenumber number   " show relativenumber when leave insert mode
 " <F4> 相对和绝对行号切换 切换行号显示 {
@@ -124,6 +133,17 @@ function! NumberToggle()
       endif
   else
       set relativenumber number
+=======
+autocmd InsertEnter * :set norelativenumber " no relativenumber in insert mode
+autocmd InsertLeave * :set relativenumber   " show relativenumber when leave insert mode
+" <F4> 相对和绝对行号切换 {
+nnoremap <F4> :call NumberToggle()<cr>
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber number
+  else
+    set relativenumber
+>>>>>>> f3f20699e8192c92a4d4e3000808c6b32e884629
   endif
 endfunc "}
 

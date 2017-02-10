@@ -5,7 +5,7 @@ bigvim
 
 ### 配置步骤
 
-> 注意，该配置需要vim7.4.x. 在MacOS 和Ubuntu 14.04Server下安装测试过。
+> 注意，该配置需要vim7.4.x. 在Ubuntu 16.04Server下安装测试过。
 
 1. 安装依赖(必须)
   ```

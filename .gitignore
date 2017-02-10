@@ -6,3 +6,6 @@ bundle/*
 vimrc.local
 vimrc.bundles.local
 vimrc.before
+vim-bookmarks
+undodir/*
+session/*

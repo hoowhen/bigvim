@@ -25,7 +25,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'airblade/vim-gitgutter'
 Plug 'inside/vim-search-pulse'
-Plug 'romainl/vim-cool'
+"Plug 'romainl/vim-cool'
 Plug 'henrik/vim-indexed-search'
 
 " fast move
@@ -125,7 +125,21 @@ call plug#end()
 " ----------------------------------------------------------------------------
 " NERDTree
 " ----------------------------------------------------------------------------
-nnoremap <leader>e :NERDTreeToggle<CR>
+"nnoremap <leader>e :NERDTreeToggle<CR>
+nmap <F7> :NERDTreeToggle<cr>
+" NERDTree            树形文件浏览器
+let g:NERDTreeShowHidden = 1                   " 显示隐藏文件
+let g:NERDTreeIndicatorMapCustom = {
+      \ 'Modified'  : '✹',
+      \ 'Staged'    : '✚',
+      \ 'Untracked' : '✭',
+      \ 'Renamed'   : '➜',
+      \ 'Unmerged'  : '═',
+      \ 'Deleted'   : '✖',
+      \ 'Dirty'     : '✗',
+      \ 'Clean'     : '✔︎',
+      \ 'Unknown'   : '?'
+      \ }                                      " 为 NERDTree-Git-Plugin 设定各个状态对应的符号
 let NERDTreeHighlightCursorline=1
 let NERDTreeQuitOnOpen=1
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
@@ -140,9 +154,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let g:tagbar_type_javascript = {
     \ 'ctagsbin' : 'jsctags'
     \ }
-nnoremap <leader>t :TagbarToggle<CR>
+"nnoremap <leader>t :TagbarToggle<CR>
+nmap <F8> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
-let g:tagbar_width = 50
+let g:tagbar_width = 35
 
 " ----------------------------------------------------------------------------
 " ctrlp.vim
@@ -171,7 +186,7 @@ nnoremap <Leader>fu :CtrlPFunky<Cr>
 " ----------------------------------------------------------------------------
 vmap <Leader>s <Plug>CtrlSFVwordExec
 
-" ----------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 " ag.vim
 " ----------------------------------------------------------------------------
 nnoremap <Leader><Leader>a :Ag!<space>
@@ -200,6 +215,7 @@ map <leader><space> :FixWhitespace<cr>
 " vim-bookmarks
 " ----------------------------------------------------------------------------
 let g:bookmark_no_default_key_mappings = 1
+let g:bookmark_auto_save_file = $HOME .'/.vim/vim-bookmarks'
 nnoremap <Leader><Leader>m :BookmarkToggle<CR>
 nnoremap <Leader>i :BookmarkAnnotate<CR>
 nnoremap <Leader>a :BookmarkShowAll<CR>

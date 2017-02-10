@@ -1,6 +1,8 @@
 " ----------------------------------------------------------------------------
 " Author:  ruanyl
 " Version: 1.1
+" Modify by hoowhen
+" 2017-02-09 19:06:36
 " ----------------------------------------------------------------------------
 
 set nocompatible
@@ -33,7 +35,7 @@ set nobackup
 set noswapfile
 set cursorcolumn          " highlight current column
 set cursorline            " highlight current line
-set t_ti= t_te=           " alway show the content on the screen after exist VIM
+"set t_ti= t_te=          " " alway show the content on the screen after exist VIM   " 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制,好处：误删什么的，   如果以前屏幕打开，可以找回
 set mouse-=a              " disable mouse
 set selection=inclusive   "set selection=exclusive
 set selectmode=mouse,key
@@ -45,7 +47,8 @@ set tm=500
 set nostartofline         " keep cursor postion when switching between buffers
 
 set number " show line number
-set nowrap " disable wrap
+set numberwidth=5
+"set nowrap " disable wrap
 
 "set list
 "set listchars=tab:›\ ,trail:•,extends:❯,precedes:❮
@@ -85,8 +88,8 @@ set scrolloff=7    " Set 7 lines to the cursor - when moving vertically using j/
 
 " File encode:encode for varied filetype
 set encoding=utf-8
-set fileencodings=utf-8,ucs-bom,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-set helplang=en
+set fileencodings=utf-8,gbk,big5,latin1
+set helplang=cn
 set termencoding=utf-8
 
 set ffs=unix,dos,mac         " Use Unix as the standard file type
@@ -96,25 +99,40 @@ set completeopt=longest,menu " behaviour of insert mode completion
 set wildmenu                 " auto complete command
 set wildignore=**.o,*~,.swp,*.bak,*.pyc,*.class " Ignore compiled files
 
-set viminfo^=% " Remember info about open buffers on close
+set viminfo^=%               " Remember info about open buffers on close
+":rviminfo! ~/.vim/viminfo
 set magic      " For regular expressions turn magic on
 
 set backspace=eol,start,indent               " Configure backspace so it acts as it should act
-set whichwrap+=<,>,h,l
-set pastetoggle=<F5>                         " when in insert mode, toggle between 'paste' and 'nopaste'
+"set whichwrap+=<,>,h,l                      " 方向可以换行
+set pastetoggle=<F2>                         " when in insert mode, toggle between 'paste' and 'nopaste'
 
 "let &colorcolumn="80,".join(range(120,999),",")
-let &colorcolumn="120"
+let &colorcolumn="80"
 
-autocmd InsertEnter * :set norelativenumber " no relativenumber in insert mode
-autocmd InsertLeave * :set relativenumber   " show relativenumber when leave insert mode
+" 插入模式下用绝对行号, 普通模式下用相对
+autocmd InsertEnter * :set norelativenumber number " no relativenumber in insert mode
+autocmd InsertLeave * :set relativenumber number   " show relativenumber when leave insert mode
+" <F4> 相对和绝对行号切换 切换行号显示 {
+nnoremap <F4> :call NumberToggle()<cr>
+function! NumberToggle()
+  if(&number == 1)
+      if(&relativenumber == 1)
+          set norelativenumber  number
+      else
+          set number!
+      endif
+  else
+      set relativenumber number
+  endif
+endfunc "}
 
 "create undo file
 if has('persistent_undo')
   set undofile                " So is persistent undo ...
   set undolevels=1000         " Maximum number of changes that can be undone
   set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
-  set undodir=~/.undodir/
+  set undodir=~/.vim/undodir/
 endif
 
 
@@ -128,6 +146,7 @@ if has('statusline')
     set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 endif
 
+autocmd! bufwritepost .vimrc source % " vimrc文件修改之后自动加载
 
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif

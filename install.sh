@@ -3,7 +3,7 @@
 APP_NAME='bigvim'
 REQUIRE="npm node git"
 [ -z "$VIM_PATH" ] && VIM_PATH="$HOME/.bigvim"
-[ -z "$REPO_URI" ] && REPO_URI='https://github.com/ruanyl/bigvim.git'
+[ -z "$REPO_URI" ] && REPO_URI='https://github.com/hoowhen/bigvim.git'
 
 # help functions
 msg() {
@@ -91,7 +91,7 @@ command -v jsctags >/dev/null || warn "for better javascript tags support, it's 
 command -v js-beautify >/dev/null || warn "you may also want to install js-beautify, npm i js-beautify -g"
 
 #vim undo dir
-if [ ! -d $HOME/.undodir ]
+if [ ! -d $HOME/.vim/undodir ]
 then
-    mkdir -p $HOME/.undodir
+    mkdir -p $HOME/.vim/undodir
 fi

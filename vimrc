@@ -39,9 +39,9 @@ set cursorline            " highlight current line
 " 设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制,好处：误删什么的，   如果以前屏幕打开，可以找回
 "set t_ti= t_te=          " " alway show the content on the screen after exist VIM  
 
-set mouse+=a              " disable mouse
+set mouse-=a              " disable mouse
 set selection=inclusive   "set selection=exclusive
-set selectmode=mouse,key
+set selectmode=key
 set title                 " change the terminal's title
 set novisualbell          " don't beep
 set noerrorbells          " don't beep
@@ -149,7 +149,7 @@ if has('statusline')
     set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 endif
 
-autocmd! bufwritepost .vimrc source % " vimrc文件修改之后自动加载
+"autocmd! bufwritepost .vimrc source % " vimrc文件修改之后自动加载
 
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
